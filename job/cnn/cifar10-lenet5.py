@@ -25,7 +25,7 @@ args = parser.parse_args()
 
 num_classes = 10
 num_data = 50000
-img_rows, img_cols = 32, 32
+img_rows, img_cols, img_channels = 32, 32, 3
 
 batch_size = 128
 prof_start_batch = args.prof_start_batch
