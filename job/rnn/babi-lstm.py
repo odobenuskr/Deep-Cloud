@@ -121,15 +121,14 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 # Setting for tensorboard profiling callback
-logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(args.batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")
-prof_range = str(args.prof_start_batch) + ',' + str(args.prof_end_batch)
-tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
-                                                 histogram_freq = 1,
-                                                 profile_batch = prof_range)
+# logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(args.batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")
+# prof_range = str(args.prof_start_batch) + ',' + str(args.prof_end_batch)
+# tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
+#                                                  histogram_freq = 1,
+#                                                  profile_batch = prof_range)
 
 # Start training
 model.fit([x, xq], y,
           batch_size=BATCH_SIZE,
           epochs=EPOCHS,
-          validation_split=0.05,
-          callbacks = [tboard_callback])
+          validation_split=0.05)
