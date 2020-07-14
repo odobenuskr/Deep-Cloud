@@ -27,7 +27,7 @@ num_classes = 10
 num_data = 50000
 img_rows, img_cols, img_channels = 32, 32, 3
 
-batch_size = 128
+batch_size = args.batch_size
 prof_start_batch = args.prof_start_batch
 prof_end_batch = args.prof_end_batch
 batch_data = math.ceil(num_data/batch_size)
@@ -37,13 +37,13 @@ epochs = math.ceil(prof_end_batch/batch_data)
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
 
 if tf.keras.backend.image_data_format() == 'channels_first':
-    x_train = x_train.reshape(x_train.shape[0], 3, img_rows, img_cols)
-    x_test = x_test.reshape(x_test.shape[0], 3, img_rows, img_cols)
-    input_shape = (3, img_rows, img_cols)
+    x_train = x_train.reshape(x_train.shape[0], img_channels, img_rows, img_cols)
+    x_test = x_test.reshape(x_test.shape[0], img_channels, img_rows, img_cols)
+    input_shape = (img_channels, img_rows, img_cols)
 else:
-    x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 3)
-    x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 3)
-    input_shape = (img_rows, img_cols, 3)
+    x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, img_channels)
+    x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, img_channels)
+    input_shape = (img_rows, img_cols, img_channels)
 
 x_train = x_train.astype('float32')
 x_test = x_test.astype('float32')
@@ -55,18 +55,19 @@ y_test = tf.keras.utils.to_categorical(y_test, num_classes)
 
 # Build LeNet-5 model
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Conv2D(32, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
-model.add(tf.keras.layers.MaxPooling2D())
-model.add(tf.keras.layers.Conv2D(64, (5, 5), activation='relu'))
-model.add(tf.keras.layers.MaxPooling2D())
+model.add(tf.keras.layers.Conv2D(6, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
+model.add(tf.keras.layers.MaxPooling2D((2, 2), strides=(2, 2)))
+model.add(tf.keras.layers.Conv2D(16, kernel_size=(5, 5), activation='relu'))
+model.add(tf.keras.layers.MaxPooling2D((2, 2), strides=(2, 2)))
 model.add(tf.keras.layers.Flatten())
-model.add(tf.keras.layers.Dense(1024, activation='relu'))
-model.add(tf.keras.layers.Dropout(0.5))
+model.add(tf.keras.layers.Dense(120, activation='relu'))
+model.add(tf.keras.layers.Dense(84, activation='relu'))
 model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
 
 model.compile(loss=tf.keras.losses.categorical_crossentropy,
               optimizer=tf.keras.optimizers.Adadelta(),
               metrics=['accuracy'])
+
 
 # Setting for tensorboard profiling callback
 logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(args.batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")

@@ -1,5 +1,5 @@
 # Dataset: CIFAR-10
-# Model: ResNet-small
+# Model: VGG-small
 
 # Import packages
 from datetime import datetime
@@ -53,43 +53,27 @@ x_test /= 255
 y_train = tf.keras.utils.to_categorical(y_train, num_classes)
 y_test = tf.keras.utils.to_categorical(y_test, num_classes)
 
-# Build ResNet-small model
-def res_block(x,filter,stride,name):
-    input = x
-    if stride != 1:
-        input = tf.keras.layers.Conv2D(filters=filter,kernel_size=1,strides=stride,name=name+'_pooling_conv')(input)
-        input = tf.keras.layers.BatchNormalization(name=name+'_pooling_bn')(input)
+# Build VGG-small model
+model = tf.keras.models.Sequential()
+model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu'))
 
-    x = tf.keras.layers.Conv2D(filters=filter,kernel_size=1,strides=stride,padding='same',name=name+'_conv1')(x)
-    x = tf.keras.layers.BatchNormalization(name=name+'_bn1')(x)
-    x = tf.nn.relu(x,name=name+'_relu1')
+model.add(tf.keras.layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(tf.keras.layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)))
 
-    x = tf.keras.layers.Conv2D(filters=filter,kernel_size=1,strides=1,padding='same',name=name+'_conv2')(x)
-    x = tf.keras.layers.BatchNormalization(name=name+'_bn2')(x)
-    x = tf.keras.layers.add([input,x],name=name+'_add')
+model.add(tf.keras.layers.Conv2D(256, (3, 3), activation='relu'))
+model.add(tf.keras.layers.Conv2D(256, (3, 3), activation='relu'))
+model.add(tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)))
 
-    x = tf.nn.relu(x,name=name+'_relu2')
-    return x
+model.add(tf.keras.layers.Flatten())
+model.add(tf.keras.layers.Dense(1024, activation='relu'))
+model.add(tf.keras.layers.Dropout(0.5))
+model.add(tf.keras.layers.Dense(1024, activation='relu'))
+model.add(tf.keras.layers.Dropout(0.5))
 
-def model_builder(x,attention):
-    
-    x = tf.keras.layers.Conv2D(filters=64,kernel_size=7,strides=2,activation='relu',padding='same',name='conv1')(x)
-    x = tf.keras.layers.BatchNormalization(name='conv1_bn')(x)
-    x = tf.keras.layers.MaxPool2D(pool_size=3,strides=2,padding='same',name='conv1_max_pool')(x)
+model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
 
-    x = res_block(x,64,2,'ResBlock21')
-    x = res_block(x,64,1,'ResBlock22')
-    x = res_block(x,128,2,'ResBlock31')
-    x = res_block(x,128,1,'ResBlock32')
-
-    x =tf.keras.layers.GlobalAveragePooling2D(name='GAP')(x) 
-    pred = tf.keras.layers.Dense(num_classes,activation='softmax')(x)
-    
-    return pred
-
-inputs = tf.keras.Input(shape=(img_rows,img_cols,img_channels))
-pred_normal = model_builder(inputs,None)
-model = tf.keras.Model(inputs=inputs,outputs=pred_normal)
 model.compile(loss=tf.keras.losses.categorical_crossentropy,
               optimizer=tf.keras.optimizers.Adadelta(),
               metrics=['accuracy'])
