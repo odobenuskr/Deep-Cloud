@@ -1,41 +1,39 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+# Dataset: CIFAR-10
+# Model: LeNet-5
 
+# Import packages
 from datetime import datetime
-from packaging import version
 import math
 import time
 import pickle
-
 import os
+import argparse
 import tensorflow as tf
 
-import argparse
-
-parser = argparse.ArgumentParser()
-parser.add_argument('--batch_size', default=128, type=int)
-parser.add_argument('--prof_start_batch', default=500, type=int)
-parser.add_argument('--prof_end_batch', default=520, type=int)
-
-args = parser.parse_args()
-
+# Check GPU Availability
 device_name = tf.test.gpu_device_name()
 if not device_name:
 	raise SystemError('GPU Device Not Found')
 print('Found GPU at :{}'.format(device_name))
 
-batch_size = args.batch_size
+# Get arguments for job
+parser = argparse.ArgumentParser()
+parser.add_argument('--batch_size', default=128, type=int)
+parser.add_argument('--prof_start_batch', default=500, type=int)
+parser.add_argument('--prof_end_batch', default=520, type=int)
+args = parser.parse_args()
+
 num_classes = 10
-
 num_data = 50000
-batch_data = math.ceil(num_data / args.batch_size)
-epochs = math.ceil(args.prof_end_batch / batch_data)
-
-# input image dimensions
 img_rows, img_cols = 32, 32
 
-# the data, split between train and test sets
+batch_size = 128
+prof_start_batch = args.prof_start_batch
+prof_end_batch = args.prof_end_batch
+batch_data = math.ceil(num_data/batch_size)
+epochs = math.ceil(prof_end_batch/batch_data)
+
+# Get train/test dataset
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
 
 if tf.keras.backend.image_data_format() == 'channels_first':
@@ -51,14 +49,11 @@ x_train = x_train.astype('float32')
 x_test = x_test.astype('float32')
 x_train /= 255
 x_test /= 255
-print('x_train shape:', x_train.shape)
-print(x_train.shape[0], 'train samples')
-print(x_test.shape[0], 'test samples')
 
-# convert class vectors to binary class matrices
 y_train = tf.keras.utils.to_categorical(y_train, num_classes)
 y_test = tf.keras.utils.to_categorical(y_test, num_classes)
 
+# Build LeNet-5 model
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Conv2D(32, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
 model.add(tf.keras.layers.MaxPooling2D())
@@ -73,39 +68,17 @@ model.compile(loss=tf.keras.losses.categorical_crossentropy,
               optimizer=tf.keras.optimizers.Adadelta(),
               metrics=['accuracy'])
 
-class BatchTimeCallback(tf.keras.callbacks.Callback):
-    def on_train_begin(self, logs=None):
-        self.all_times = []
-
-    def on_train_end(self, logs=None):
-        time_filename = "/home/ubuntu/Deep-Cloud/tensorstats/times-" + str(args.batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S") + ".pickle"
-        time_file = open(time_filename, 'ab')
-        pickle.dump(self.all_times, time_file)
-        time_file.close()
-
-    def on_epoch_begin(self, epoch, logs=None):
-        self.epoch_times = []
-
-    def on_epoch_end(self, epoch, logs=None):
-        self.all_times.append(self.epoch_times)
-
-    def on_train_batch_begin(self, batch, logs=None):
-        self.batch_time_start = time.time()
-
-    def on_train_batch_end(self, batch, logs=None):
-        self.epoch_times.append(time.time() - self.batch_time_start)
-
-batch_time_callback = BatchTimeCallback()
-
+# Setting for tensorboard profiling callback
 logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(args.batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")
 prof_range = str(args.prof_start_batch) + ',' + str(args.prof_end_batch)
 tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
                                                  histogram_freq = 1,
                                                  profile_batch = prof_range)
 
+# Start training
 model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           verbose=1,
           validation_data=(x_test, y_test),
-          callbacks = [tboard_callback, batch_time_callback])
+          callbacks = [tboard_callback])
