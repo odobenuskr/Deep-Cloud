@@ -1,6 +1,6 @@
 # Dataset: imdb
-# Model: LSTM
-# Reference: https://github.com/keras-team/keras/blob/master/examples/imdb_lstm.py
+# Model: biLSTM
+# Reference: https://github.com/keras-team/keras/blob/master/examples/imdb_bidirectional_lstm.py
 
 # Import packages
 import tensorflow as tf
@@ -25,7 +25,8 @@ x_test = tf.keras.preprocessing.sequence.pad_sequences(x_test, maxlen=maxlen)
 # Build LSTM model
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Embedding(max_features, 128, input_length=maxlen))
-model.add(tf.keras.layers.LSTM(128, dropout=0.2, recurrent_dropout=0.2))
+model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)))
+model.add(tf.keras.layers.Dropout(0.5))
 model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
 model.compile(loss='binary_crossentropy',
@@ -42,5 +43,5 @@ model.compile(loss='binary_crossentropy',
 # Start training
 model.fit(x_train, y_train,
           batch_size=batch_size,
-          epochs=15,
-          validation_data=(x_test, y_test))
+          epochs=4,
+          validation_data=[x_test, y_test])

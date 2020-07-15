@@ -12,9 +12,10 @@ import tensorflow as tf
 # Check GPU Availability
 device_name = tf.test.gpu_device_name()
 if not device_name:
-	raise SystemError('GPU Device Not Found')
-print('Found GPU at :{}'.format(device_name))
-
+    print('Cannot found GPU. Training with CPU')
+else:
+    print('Found GPU at :{}'.format(device_name))
+    
 # Get arguments for job
 RNN = tf.keras.layers.LSTM
 EMBED_HIDDEN_SIZE = 50
