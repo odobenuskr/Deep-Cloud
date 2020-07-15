@@ -22,7 +22,7 @@ batch_size = 32
 x_train = tf.keras.preprocessing.sequence.pad_sequences(x_train, maxlen=maxlen)
 x_test = tf.keras.preprocessing.sequence.pad_sequences(x_test, maxlen=maxlen)
 
-# Build LSTM model
+# Build BiLSTM model
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Embedding(max_features, 128, input_length=maxlen))
 model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)))

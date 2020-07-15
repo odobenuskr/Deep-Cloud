@@ -101,17 +101,17 @@ word_idx = dict((c, i + 1) for i, c in enumerate(vocab))
 story_maxlen = max(map(len, (x for x, _, _ in train + test)))
 query_maxlen = max(map(len, (x for _, x, _ in train + test)))
 
-# Build Simple RNN model
+# Build biLSTM model
 x, xq, y = vectorize_stories(train, word_idx, story_maxlen, query_maxlen)
 tx, txq, ty = vectorize_stories(test, word_idx, story_maxlen, query_maxlen)
 
 sentence = tf.keras.layers.Input(shape=(story_maxlen,), dtype='int32')
 encoded_sentence = tf.keras.layers.Embedding(vocab_size, EMBED_HIDDEN_SIZE)(sentence)
-encoded_sentence = tf.keras.layers.SimpleRNN(SENT_HIDDEN_SIZE)(encoded_sentence)
+encoded_sentence = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(SENT_HIDDEN_SIZE))(encoded_sentence)
 
 question = tf.keras.layers.Input(shape=(query_maxlen,), dtype='int32')
 encoded_question = tf.keras.layers.Embedding(vocab_size, EMBED_HIDDEN_SIZE)(question)
-encoded_question = tf.keras.layers.SimpleRNN(QUERY_HIDDEN_SIZE)(encoded_question)
+encoded_question = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(QUERY_HIDDEN_SIZE))(encoded_question)
 
 merged = tf.keras.layers.concatenate([encoded_sentence, encoded_question])
 preds = tf.keras.layers.Dense(vocab_size, activation='softmax')(merged)
