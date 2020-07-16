@@ -78,7 +78,7 @@ model.add(tf.keras.layers.Dropout(0.5))
 model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
 
 model.compile(loss=tf.keras.losses.categorical_crossentropy,
-              optimizer=tf.keras.optimizers.Adadelta(),
+              optimizer=optimizer,
               metrics=['accuracy'])
 
 # Setting for tensorboard profiling callback

@@ -1,4 +1,4 @@
-# Dataset: Fashion MNIST
+# Dataset: MNIST
 # Model: ResNet-small
 
 # Import packages
@@ -21,6 +21,7 @@ parser.add_argument('--batch_size', default=128, type=int)
 parser.add_argument('--prof_start_batch', default=500, type=int)
 parser.add_argument('--prof_end_batch', default=520, type=int)
 parser.add_argument('--prof_or_latency', default='profiling', type=str)
+parser.add_argument('--optimizer', default='Adadelta', type=str)
 args = parser.parse_args()
 
 num_classes = 10
@@ -30,9 +31,10 @@ img_rows, img_cols, img_channels = 28, 28, 1
 batch_size = args.batch_size
 prof_start_batch = args.prof_start_batch
 prof_end_batch = args.prof_end_batch
-batch_data = math.ceil(num_data/batch_size)
-epochs = math.ceil(prof_end_batch/batch_data)
+batch_num = math.ceil(num_data/batch_size)
+epochs = math.ceil(prof_end_batch/batch_num)
 prof_or_latency = args.prof_or_latency
+optimizer = args.optimizer
 
 # Get train/test dataset
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
@@ -92,7 +94,7 @@ inputs = tf.keras.Input(shape=(img_rows,img_cols,img_channels))
 pred_normal = model_builder(inputs,None)
 model = tf.keras.Model(inputs=inputs,outputs=pred_normal)
 model.compile(loss=tf.keras.losses.categorical_crossentropy,
-              optimizer=tf.keras.optimizers.Adadelta(),
+              optimizer=optimizer,
               metrics=['accuracy'])
 
 # Setting for tensorboard profiling callback

@@ -1,4 +1,4 @@
-# Dataset: Fashion MNIST
+# Dataset: MNIST
 # Model: VGG-small
 
 # Import packages
