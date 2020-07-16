@@ -27,7 +27,6 @@ parser.add_argument('--optimizer', default='Adadelta', type=str)
 args = parser.parse_args()
 
 max_features = 20000
-max_words = 1000
 maxlen = 256
 num_data = 11228
 num_classes = 46
@@ -41,7 +40,7 @@ prof_or_latency = args.prof_or_latency
 optimizer = args.optimizer
 
 # Get train/test dataset
-(x_train, y_train), (x_test, y_test) = tf.keras.datasets.reuters.load_data(num_words=max_words, test_split=0.2)
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.reuters.load_data(num_words=max_features, test_split=0.2)
 x_train = tf.keras.preprocessing.sequence.pad_sequences(x_train, maxlen=maxlen)
 x_test = tf.keras.preprocessing.sequence.pad_sequences(x_test, maxlen=maxlen)
 

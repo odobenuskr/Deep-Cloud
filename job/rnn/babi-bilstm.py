@@ -1,5 +1,5 @@
 # Dataset: babi
-# Model: LSTM
+# Model: biLSTM
 # Reference: https://github.com/keras-team/keras/blob/master/examples/babi_rnn.py
 
 # Import packages
