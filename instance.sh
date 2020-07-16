@@ -1,8 +1,22 @@
 #!/bin/bash
 
+# Type of ec2 instance to run a deep learning job
 INSTANCE_TYPE=$1
-DATASET=$2
-MODEL=$3
+
+# Type of model (CNN/RNN)
+MODEL_TYPE=$2
+
+# Type of specific dataset(cifar10/fmnist/mnist/babi/imdb/reuters)
+DATASET=$3
+
+# Type of specific model(lenet5/resnetsmall/vggsmall/rnn/lstm/bilstm)
+MODEL=$4
+
+# Run with profiling or just measure latency(profiling/latency)
+PROF_MODE=$5
+
+# Type of optimizer for training(SGD/Adadelta/Adam)
+OPTIMIZER=$6
 
 LAUNCH_INFO=$(aws ec2 run-instances --image-id ami-abcd1234 --count 1 --instance-type $INSTANCE_TYPE \
 --key-name my-key-pair --subnet-id subnet-abcd1234 --security-group-ids sg-abcd1234)
@@ -23,15 +37,18 @@ ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS 'cd /home/ubuntu/Deep-Cloud/;sudo 
 # Run Experiments
 sleep 10
 echo 'run start'
-BASE_COMMAND="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run.sh $DATASET-$MODEL.py "
-RUN_COMMAND="$BASE_COMMAND$INSTANCE_TYPE"
-ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $RUN_COMMAND
+EXP_COMMAND="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run.sh $MODEL_TYPE $DATASET $MODEL $PROF_MODE $OPTIMIZER $INSTANCE_TYPE"
+ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $EXP_COMMAND
+# RUN_COMMAND="$BASE_COMMAND$INSTANCE_TYPE"
+# ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $RUN_COMMAND
 
 # Run Tensorboard backgroound
 sleep 10
-BASE_COMMAND2="cd /home/ubuntu/Deep-Cloud/;sudo bash ./tensorboard_result.sh "
-RUN_COMMAND2="$BASE_COMMAND2$INSTANCE_TYPE"
-ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $RUN_COMMAND2
+TB_COMMAND="cd /home/ubuntu/Deep-Cloud/;sudo bash ./tensorboard_result.sh $INSTANCE_TYPE"
+ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $TB_COMMAND
+# BASE_COMMAND2="cd /home/ubuntu/Deep-Cloud/;sudo bash ./tensorboard_result.sh "
+# RUN_COMMAND2="$BASE_COMMAND2$INSTANCE_TYPE"
+# ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $RUN_COMMAND2
 
 # Get csv files from instance
 sleep 10
