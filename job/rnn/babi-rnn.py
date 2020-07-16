@@ -4,6 +4,11 @@
 
 # Import packages
 from functools import reduce
+from datetime import datetime
+import math
+import time
+import pickle
+import argparse
 import re
 import tarfile
 import numpy as np
@@ -15,14 +20,32 @@ if not device_name:
     print('Cannot found GPU. Training with CPU')
 else:
     print('Found GPU at :{}'.format(device_name))
-    
+
 # Get arguments for job
-RNN = tf.keras.layers.LSTM
+parser = argparse.ArgumentParser()
+parser.add_argument('--batch_size', default=128, type=int)
+parser.add_argument('--prof_start_batch', default=500, type=int)
+parser.add_argument('--prof_end_batch', default=520, type=int)
+parser.add_argument('--prof_or_latency', default='profiling', type=str)
+parser.add_argument('--optimizer', default='Adadelta', type=str)
+args = parser.parse_args()
+
+# max_features = 20000
+# maxlen = 256
+# num_classes = 1
+
 EMBED_HIDDEN_SIZE = 50
 SENT_HIDDEN_SIZE = 100
 QUERY_HIDDEN_SIZE = 100
-BATCH_SIZE = 32
-EPOCHS = 20
+num_data = 10000
+
+batch_size = args.batch_size
+prof_start_batch = args.prof_start_batch
+prof_end_batch = args.prof_end_batch
+batch_num = math.ceil(num_data/batch_size)
+epochs = math.ceil(prof_end_batch/batch_num)
+prof_or_latency = args.prof_or_latency
+optimizer = args.optimizer
 
 # Define functions for preprocessing
 def tokenize(sent):
@@ -86,7 +109,7 @@ except:
           '$ mv tasks_1-20_v1-2.tar.gz ~/.keras/datasets/babi-tasks-v1-2.tar.gz')
     raise
     
-challenge = 'tasks_1-20_v1-2/en-10k/qa2_two-supporting-facts_{}.txt'
+challenge = 'tasks_1-20_v1-2/en-10k/qa1_single-supporting-fact_{}.txt'
 with tarfile.open(path) as tar:
     train = get_stories(tar.extractfile(challenge.format('train')))
     test = get_stories(tar.extractfile(challenge.format('test')))
@@ -117,19 +140,58 @@ merged = tf.keras.layers.concatenate([encoded_sentence, encoded_question])
 preds = tf.keras.layers.Dense(vocab_size, activation='softmax')(merged)
 
 model = tf.keras.Model([sentence, question], preds)
-model.compile(optimizer='adam',
+model.compile(optimizer=optimizer,
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
 # Setting for tensorboard profiling callback
-# logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(args.batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")
-# prof_range = str(args.prof_start_batch) + ',' + str(args.prof_end_batch)
-# tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
-#                                                  histogram_freq = 1,
-#                                                  profile_batch = prof_range)
+logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")
+prof_range = str(prof_start_batch) + ',' + str(prof_end_batch)
+tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
+                                                 histogram_freq = 1,
+                                                 profile_batch = prof_range)
 
-# Start training
-model.fit([x, xq], y,
-          batch_size=BATCH_SIZE,
-          epochs=EPOCHS,
-          validation_split=0.05)
+# Setting for latency check callback
+class BatchTimeCallback(tf.keras.callbacks.Callback):
+    def on_train_begin(self, logs=None):
+        self.all_times = []
+
+    def on_train_end(self, logs=None):
+        time_filename = "/home/ubuntu/Deep-Cloud/tensorstats/times-" + str(batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S") + ".pickle"
+        time_file = open(time_filename, 'ab')
+        pickle.dump(self.all_times, time_file)
+        time_file.close()
+
+    def on_epoch_begin(self, epoch, logs=None):
+        self.epoch_times = []
+        self.epoch_time_start = time.time()
+
+    def on_epoch_end(self, epoch, logs=None):
+        self.epoch_time_end = time.time()
+        self.all_times.append(self.epoch_time_end - self.epoch_time_start)
+        self.all_times.append(self.epoch_times)
+
+    def on_train_batch_begin(self, batch, logs=None):
+        self.batch_time_start = time.time()
+
+    def on_train_batch_end(self, batch, logs=None):
+        self.epoch_times.append(time.time() - self.batch_time_start)
+
+latency_callback = BatchTimeCallback()
+
+if prof_or_latency == 'profiling':
+    # Start training with profiling
+    model.fit([x, xq], y,
+            batch_size=batch_size,
+            epochs=epochs,
+            verbose=1,
+            callbacks=[tboard_callback])
+elif prof_or_latency == 'latency':
+    # Start training with check latency
+    model.fit([x, xq], y,
+            batch_size=batch_size,
+            epochs=epochs,
+            verbose=1,
+            callbacks=[latency_callback])
+else:
+    print('error')
