@@ -32,6 +32,7 @@ prof_start_batch = args.prof_start_batch
 prof_end_batch = args.prof_end_batch
 batch_data = math.ceil(num_data/batch_size)
 epochs = math.ceil(prof_end_batch/batch_data)
+prof_or_latency = args.prof_or_latency
 
 # Get train/test dataset
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
