@@ -20,8 +20,7 @@ else:
 # Get arguments for job
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size', default=128, type=int)
-parser.add_argument('--prof_start_batch', default=500, type=int)
-parser.add_argument('--prof_end_batch', default=520, type=int)
+parser.add_argument('--prof_point', default=1.5, type=float)
 parser.add_argument('--prof_or_latency', default='profiling', type=str)
 parser.add_argument('--optimizer', default='Adadelta', type=str)
 args = parser.parse_args()
@@ -32,10 +31,12 @@ num_data = 25000
 num_classes = 1
 
 batch_size = args.batch_size
-prof_start_batch = args.prof_start_batch
-prof_end_batch = args.prof_end_batch
+prof_point = args.prof_point
 batch_num = math.ceil(num_data/batch_size)
-epochs = math.ceil(prof_end_batch/batch_num)
+epochs = math.ceil(prof_point)
+prof_start = math.floor(batch_num * prof_point)
+prof_len = 1
+prof_range = '{}, {}'.format(prof_start, prof_start + prof_len)
 prof_or_latency = args.prof_or_latency
 optimizer = args.optimizer
 
@@ -57,7 +58,6 @@ model.compile(loss='binary_crossentropy',
 
 # Setting for tensorboard profiling callback
 logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")
-prof_range = str(prof_start_batch) + ',' + str(prof_end_batch)
 tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
                                                  histogram_freq = 1,
                                                  profile_batch = prof_range)
