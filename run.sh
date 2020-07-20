@@ -30,15 +30,26 @@ PROF_POINT=1.5
 
 # EOF
 
-JOB_DIR1="/home/ubuntu/Deep-Cloud/job/cnn/mnist-lenet5.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
-JOB_DIR2="/home/ubuntu/Deep-Cloud/job/cnn/mnist-resnetsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
-JOB_DIR3="/home/ubuntu/Deep-Cloud/job/cnn/mnist-vggsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
-JOB_DIR4="/home/ubuntu/Deep-Cloud/job/cnn/fmnist-lenet5.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
-JOB_DIR5="/home/ubuntu/Deep-Cloud/job/cnn/fmnist-resnetsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
-JOB_DIR6="/home/ubuntu/Deep-Cloud/job/cnn/fmnist-vggsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
-JOB_DIR7="/home/ubuntu/Deep-Cloud/job/cnn/cifar10-lenet5.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
-JOB_DIR8="/home/ubuntu/Deep-Cloud/job/cnn/cifar10-resnetsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
-JOB_DIR9="/home/ubuntu/Deep-Cloud/job/cnn/cifar10-vggsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR1="/home/ubuntu/Deep-Cloud/job/cnn/mnist-lenet5.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR2="/home/ubuntu/Deep-Cloud/job/cnn/mnist-resnetsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR3="/home/ubuntu/Deep-Cloud/job/cnn/mnist-vggsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR4="/home/ubuntu/Deep-Cloud/job/cnn/fmnist-lenet5.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR5="/home/ubuntu/Deep-Cloud/job/cnn/fmnist-resnetsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR6="/home/ubuntu/Deep-Cloud/job/cnn/fmnist-vggsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR7="/home/ubuntu/Deep-Cloud/job/cnn/cifar10-lenet5.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR8="/home/ubuntu/Deep-Cloud/job/cnn/cifar10-resnetsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+# JOB_DIR9="/home/ubuntu/Deep-Cloud/job/cnn/cifar10-vggsmall.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+
+JOB_DIR1="/home/ubuntu/Deep-Cloud/job/rnn/babi-rnn.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+JOB_DIR2="/home/ubuntu/Deep-Cloud/job/rnn/babi-lstm.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+JOB_DIR3="/home/ubuntu/Deep-Cloud/job/rnn/babi-bisltm.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+JOB_DIR4="/home/ubuntu/Deep-Cloud/job/rnn/imdb-rnn.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+JOB_DIR5="/home/ubuntu/Deep-Cloud/job/rnn/imdb-lstm.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+JOB_DIR6="/home/ubuntu/Deep-Cloud/job/rnn/imdb-bisltm.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+JOB_DIR7="/home/ubuntu/Deep-Cloud/job/rnn/reuters-rnn.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+JOB_DIR8="/home/ubuntu/Deep-Cloud/job/rnn/reuters-lstm.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+JOB_DIR9="/home/ubuntu/Deep-Cloud/job/rnn/reuters-bisltm.py --optimizer $OPTIMIZER --prof_or_latency $PROF_MODE --prof_point $PROF_POINT"
+
 
 # Get profile result at half of 2epoch
 sudo -i -u root bash << EOF
