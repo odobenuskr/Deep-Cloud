@@ -26,7 +26,7 @@ parser.add_argument('--optimizer', default='Adadelta', type=str)
 args = parser.parse_args()
 
 max_features = 20000
-maxlen = 256
+maxlen = 128
 num_data = 11228
 num_classes = 46
 

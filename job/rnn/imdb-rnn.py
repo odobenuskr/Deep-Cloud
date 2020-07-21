@@ -26,7 +26,7 @@ parser.add_argument('--optimizer', default='Adadelta', type=str)
 args = parser.parse_args()
 
 max_features = 20000
-maxlen = 256
+maxlen = 128
 num_data = 25000
 num_classes = 1
 
@@ -48,7 +48,6 @@ x_test = tf.keras.preprocessing.sequence.pad_sequences(x_test, maxlen=maxlen)
 # Build Simple RNN model
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Embedding(max_features, 64))
-model.add(tf.keras.layers.SimpleRNN(64, return_sequences=True))
 model.add(tf.keras.layers.SimpleRNN(64))
 model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
 

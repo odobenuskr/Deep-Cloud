@@ -26,7 +26,7 @@ parser.add_argument('--optimizer', default='Adadelta', type=str)
 args = parser.parse_args()
 
 max_features = 20000
-maxlen = 256
+maxlen = 128
 num_data = 11228
 num_classes = 46
 
@@ -51,7 +51,6 @@ y_test = tf.keras.utils.to_categorical(y_test, num_classes)
 # Build SimpleRNN model
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Embedding(max_features, 64))
-model.add(tf.keras.layers.SimpleRNN(64, return_sequences=True))
 model.add(tf.keras.layers.SimpleRNN(64))
 model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
 
