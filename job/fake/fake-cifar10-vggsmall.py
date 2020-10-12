@@ -84,7 +84,7 @@ model.compile(loss=tf.keras.losses.categorical_crossentropy,
               optimizer=optimizer,
               metrics=['accuracy'])
 
-job_name = "real-cifar10-vggsamll"
+job_name = "fake-cifar10-vggsamll"
 logs = "/home/ubuntu/Deep-Cloud/logs/" + "{}-{}-{}-{}".format(job_name, optimizer, batch_size, datetime.now().strftime("%Y%m%d-%H%M%S"))
 tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
                                                  histogram_freq = 1,
