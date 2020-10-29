@@ -39,8 +39,8 @@ dataset_224 = {
     'img_rows': 224,
     'img_cols': 224,
     'img_channels': 3,
-    'num_data': 500,
-    'num_test': 100
+    'num_data': 2000,
+    'num_test': 500
 }
 
 dataset_256 = {
@@ -48,8 +48,8 @@ dataset_256 = {
     'img_rows': 256,
     'img_cols': 256,
     'img_channels': 3,
-    'num_data': 500,
-    'num_test': 100
+    'num_data': 2000,
+    'num_test': 500
 }
 
 def select_dataset(dataset_name):

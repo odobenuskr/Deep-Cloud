@@ -38,30 +38,6 @@ def select_model(model_name, input_shape, num_classes):
         model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
         return model
 
-    def VGGSmall(input_shape, num_classes):
-        model = tf.keras.models.Sequential()
-        model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3),
-                                         activation='relu', input_shape=input_shape))
-        model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu'))
-
-        model.add(tf.keras.layers.Conv2D(128, (3, 3), activation='relu'))
-        model.add(tf.keras.layers.Conv2D(128, (3, 3), activation='relu'))
-        model.add(tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)))
-
-        model.add(tf.keras.layers.Conv2D(256, (3, 3), activation='relu'))
-        model.add(tf.keras.layers.Conv2D(256, (3, 3), activation='relu'))
-        model.add(tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)))
-
-        model.add(tf.keras.layers.Flatten())
-        model.add(tf.keras.layers.Dense(1024, activation='relu'))
-        model.add(tf.keras.layers.Dropout(0.5))
-        model.add(tf.keras.layers.Dense(1024, activation='relu'))
-        model.add(tf.keras.layers.Dropout(0.5))
-
-        model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
-
-        return model
-
     def ResNetSmall(input_shape, num_classes):
         # Build ResNet-small model
         def res_block(x,filter,stride,name):
@@ -128,7 +104,25 @@ def select_model(model_name, input_shape, num_classes):
         model.add(Dense(units=4096,activation="relu"))
         model.add(Dense(units=num_classes, activation="softmax"))
         return model
-
+    
+    def VGGSmall(input_shape, num_classes):
+        model = tf.keras.models.Sequential()
+        model.add(Conv2D(input_shape=input_shape,
+                         filters=32,kernel_size=(3,3),padding="same", activation="relu"))
+        model.add(Conv2D(filters=32,kernel_size=(3,3),padding="same", activation="relu"))
+        model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+        model.add(Conv2D(filters=64, kernel_size=(3,3), padding="same", activation="relu"))
+        model.add(Conv2D(filters=64, kernel_size=(3,3), padding="same", activation="relu"))
+        model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+        model.add(Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"))
+        model.add(Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"))
+        model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+        model.add(Flatten())
+        model.add(Dense(units=1024,activation="relu"))
+        model.add(Dense(units=1024,activation="relu"))
+        model.add(Dense(units=num_classes, activation="softmax"))
+        return model
+    
     def VGG13(input_shape, num_classes):
         model = tf.keras.models.Sequential()
         model.add(Conv2D(input_shape=input_shape,
