@@ -51,3 +51,17 @@ dataset_256 = {
     'num_data': 500,
     'num_test': 100
 }
+
+def select_dataset(dataset_name):
+    if dataset_name == 16:
+        return dataset_16
+    elif dataset_name == 32:
+        return dataset_32
+    elif dataset_name == 64:
+        return dataset_64
+    elif dataset_name == 128:
+        return dataset_128
+    elif dataset_name == 224:
+        return dataset_224
+    elif dataset_name == 256:
+        return dataset_256
