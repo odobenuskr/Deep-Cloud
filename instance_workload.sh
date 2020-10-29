@@ -25,16 +25,23 @@ ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS 'cd /home/ubuntu/Deep-Cloud/;sudo 
 # Run Experiments
 sleep 10
 echo 'run start'
-EXP_COMMAND="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run_all_workload.sh $INSTANCE_TYPE $PROF_MODE 16"
-ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $EXP_COMMAND
+EXP_COMMAND8="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run_all_workload.sh $INSTANCE_TYPE $PROF_MODE 8"
+ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $EXP_COMMAND8
+EXP_COMMAND16="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run_all_workload.sh $INSTANCE_TYPE $PROF_MODE 16"
+ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $EXP_COMMAND16
+EXP_COMMAND32="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run_all_workload.sh $INSTANCE_TYPE $PROF_MODE 32"
+ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $EXP_COMMAND32
+EXP_COMMAND64="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run_all_workload.sh $INSTANCE_TYPE $PROF_MODE 64"
+ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $EXP_COMMAND64
+EXP_COMMAND128="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run_all_workload.sh $INSTANCE_TYPE $PROF_MODE 128"
+ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $EXP_COMMAND128
+EXP_COMMAND256="cd /home/ubuntu/Deep-Cloud/;sudo bash ./run_all_workload.sh $INSTANCE_TYPE $PROF_MODE 256"
+ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $EXP_COMMAND256
 
 # Run Tensorboard backgroound
 sleep 10
 TB_COMMAND="cd /home/ubuntu/Deep-Cloud/;sudo bash ./tensorboard_result.sh $INSTANCE_TYPE"
 ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $TB_COMMAND
-# BASE_COMMAND2="cd /home/ubuntu/Deep-Cloud/;sudo bash ./tensorboard_result.sh "
-# RUN_COMMAND2="$BASE_COMMAND2$INSTANCE_TYPE"
-# ssh -i awspwd.pem -t ubuntu@$INSTANCE_PUB_DNS $RUN_COMMAND2
 
 # Get csv files from instance
 sleep 10
