@@ -26,6 +26,7 @@ parser.add_argument('--prof_point', default=1.5, type=float)
 parser.add_argument('--prof_len', default=1, type=int)
 parser.add_argument('--prof_or_latency', default='profiling', type=str)
 parser.add_argument('--optimizer', default='SGD', type=str)
+parser.add_argument('--instance_type', default='EC2', type=str)
 args = parser.parse_args()
     
 # Dataset Info
@@ -85,7 +86,7 @@ model.compile(loss=tf.keras.losses.categorical_crossentropy,
               optimizer=optimizer,
               metrics=['accuracy'])
 
-job_name = "{}dataset-{}".format(args.dataset, model_name)
+job_name = "{}-{}dataset-{}".format(args.instance_type, args.dataset, model_name)
 logs = "/home/ubuntu/Deep-Cloud/logs/" + "{}-{}-{}-{}".format(
     job_name, optimizer, batch_size, datetime.now().strftime("%Y%m%d-%H%M%S"))
 tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
