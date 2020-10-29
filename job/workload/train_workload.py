@@ -121,7 +121,7 @@ class BatchTimeCallback(tf.keras.callbacks.Callback):
 
 latency_callback = BatchTimeCallback()
 
-if prof_or_latency == 'profiling':
+if args.prof_or_latency == 'profiling':
     # Start training with profiling
     model.fit(x_train, y_train,
             batch_size=batch_size,
@@ -129,7 +129,7 @@ if prof_or_latency == 'profiling':
             verbose=1,
             validation_data=(x_test, y_test),
             callbacks = [tboard_callback])
-elif prof_or_latency == 'latency':
+elif args.prof_or_latency == 'latency':
     # Start training with check latency
     model.fit(x_train, y_train,
             batch_size=batch_size,
