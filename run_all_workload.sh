@@ -9,66 +9,76 @@ JOB_DIR1="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model LeNet5 
 JOB_DIR2="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model LeNet5 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 JOB_DIR3="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model LeNet5 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 JOB_DIR4="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model LeNet5 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR5="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model LeNet5 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR5="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model LeNet5 --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR6="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model LeNet5 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # VGGSmall
-JOB_DIR6="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR7="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR8="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR9="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR10="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR7="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR8="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR9="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR10="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR11="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR12="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGGSmall --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # VGG11
-JOB_DIR11="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR12="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR13="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR14="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR13="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR14="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR15="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR16="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR17="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG11 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # VGG13
-JOB_DIR15="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR16="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR17="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR18="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR18="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR19="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR20="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR21="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR22="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG13 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # VGG16
-JOB_DIR19="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR20="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR21="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR22="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR23="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR24="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR25="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR26="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR27="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG16 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # VGG19
-JOB_DIR23="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR24="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR25="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR26="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR28="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR29="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR30="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR31="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR32="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model VGG19 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # ResNetSmall
-JOB_DIR27="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR28="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR29="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR30="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR31="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR33="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR34="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR35="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR36="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR37="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR38="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNetSmall --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # ResNet18
-JOB_DIR32="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR33="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR34="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR35="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR36="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR39="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR40="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR41="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR42="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR43="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR44="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet18 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # ResNet34
-JOB_DIR37="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR38="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR39="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR40="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR41="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR45="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR46="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR47="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR48="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR49="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR50="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet34 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # ResNet50
-JOB_DIR42="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR43="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR44="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR45="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
-JOB_DIR46="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR51="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 16 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR52="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 32 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR53="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 64 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR54="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 128 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR55="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 224 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
+JOB_DIR56="/home/ubuntu/Deep-Cloud/job/workload/train_workload.py --model ResNet50 --dataset 256 --prof_or_latency $PROF_MODE --instance_type $INSTANCE_TYPE"
 
 # Get profile result
 sudo -i -u root bash << EOF
@@ -164,6 +174,26 @@ sleep 2
 python3.6 $JOB_DIR45 --batch_size $BATCH_SIZE
 sleep 2
 python3.6 $JOB_DIR46 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR47 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR48 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR49 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR50 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR51 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR52 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR53 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR54 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR55 --batch_size $BATCH_SIZE
+sleep 2
+python3.6 $JOB_DIR56 --batch_size $BATCH_SIZE
 sleep 2
 
 EOF
