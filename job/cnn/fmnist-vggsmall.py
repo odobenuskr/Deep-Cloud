@@ -60,23 +60,21 @@ y_test = tf.keras.utils.to_categorical(y_test, num_classes)
 
 # Build VGG-small model
 model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
-model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu'))
-
-model.add(tf.keras.layers.Conv2D(128, (3, 3), activation='relu'))
-model.add(tf.keras.layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(tf.keras.layers.Conv2D(32, kernel_size=(3, 3), padding="same", activation='relu', input_shape=input_shape))
+model.add(tf.keras.layers.Conv2D(32, kernel_size=(3, 3), padding="same", activation='relu'))
 model.add(tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)))
 
-model.add(tf.keras.layers.Conv2D(256, (3, 3), activation='relu'))
-model.add(tf.keras.layers.Conv2D(256, (3, 3), activation='relu'))
+model.add(tf.keras.layers.Conv2D(64, (3, 3), padding="same", activation='relu'))
+model.add(tf.keras.layers.Conv2D(64, (3, 3), padding="same", activation='relu'))
+model.add(tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)))
+
+model.add(tf.keras.layers.Conv2D(128, (3, 3), padding="same", activation='relu'))
+model.add(tf.keras.layers.Conv2D(128, (3, 3), padding="same", activation='relu'))
 model.add(tf.keras.layers.MaxPool2D(pool_size=(2,2),strides=(2,2)))
 
 model.add(tf.keras.layers.Flatten())
 model.add(tf.keras.layers.Dense(1024, activation='relu'))
-model.add(tf.keras.layers.Dropout(0.5))
 model.add(tf.keras.layers.Dense(1024, activation='relu'))
-model.add(tf.keras.layers.Dropout(0.5))
-
 model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
 
 model.compile(loss=tf.keras.losses.categorical_crossentropy,
