@@ -9,5 +9,5 @@ pip3 install --upgrade pip
 pip3 install tensorflow==2.2
 #pip3 uninstall tensorboard
 #pip3 install tensorboard==2.2
-pip3 install tensorboard_plugin_profile
+pip3 install tensorboard_plugin_profile==2.2
 pip3 install tensorflow_datasets
