@@ -6,6 +6,7 @@ ln -s /usr/local/cuda-10.1 /usr/local/cuda
 
 # Upgrade pip3 and install tensorflow, tensorboard, dataset packages
 pip3 install --upgrade pip
-pip3 install tensorflow==2.1
+pip3 install tf-nightly
+pip3 install tb-nightly
 pip3 install tensorboard_plugin_profile==2.2
 pip3 install tensorflow_datasets
